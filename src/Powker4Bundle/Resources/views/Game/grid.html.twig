@@ -1,0 +1,64 @@
+{% extends 'Powker4Bundle::layout.html.twig' %}
+{% block main %}
+<table id="grid">
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><div class="piece_b"><div></div></div></td>
+        <td><div class="piece_a"><div></div></div></td>
+        <td></td>
+        <td><div class="piece_b"><div></div></div></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="piece_b"><div></div></div></td>
+        <td></td>
+        <td><div class="piece_a"><div></div></div></td>
+        <td><div class="piece_a"><div></div></div></td>
+        <td><div class="piece_b"><div></div></div></td>
+        <td><div class="piece_a"><div></div></div></td>
+    </tr>
+</table>
+<form id="form">
+    <label>Colonne (de 1 à 7) :<Label>
+    <input type="number" name="column" id="number" min="1" max="7" value="1">
+    <input type="submit" name="submit" id="submit" value="Valider"/>
+</form>
+{% endblock main %}

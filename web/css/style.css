@@ -1,3 +1,63 @@
+* {
+    margin:0px;
+    padding:0px;
+}
 body {
-  background: #666;
+    background-color:#000000;
+}
+#grid {
+    margin-top:100px;
+    margin-bottom:0px;
+    margin-left:auto;
+    margin-right:auto;
+    border-collapse:collapse;
+    border-spacing:0px;
+}
+#grid td {
+    width:80px;
+    height:80px;
+    border:2px solid #FFFFFF;
+}
+#form {
+    color:#FFFFFF;
+    width:574px;
+    margin-top:0px;
+    margin-bottom:100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#form input[type="number"] {
+    height:25px;
+}
+#form input[type="submit"] {
+    width:50px;
+    height:25px;
+}
+.piece_a {
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background-color:#FFED3D;
+    margin:auto;
+    padding:2px;
+}
+.piece_a > div {
+    border-radius:50%;
+    border:2px solid #D1C030;
+    width:56px;
+    height:56px;
+}
+.piece_b {
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background-color:#FF4B4B;
+    margin:auto;
+    padding:2px;
+}
+.piece_b > div {
+    border-radius:50%;
+    border:2px solid #B23333;
+    width:56px;
+    height:56px;
 }
