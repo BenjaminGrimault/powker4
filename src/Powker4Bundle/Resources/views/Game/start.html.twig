@@ -1,0 +1,12 @@
+{% extends 'Powker4Bundle::layout.html.twig' %}
+
+{% block main %}
+{{ form_start(form) }}
+
+{{ form_label(form.x) }}
+{{ form_widget(form.x, {'attr': {'class': 'input', 'value': '7'}}) }}
+{{ form_label(form.y) }}
+{{ form_widget(form.y, {'attr': {'class': 'input', 'value': '6'}}) }}
+
+{{ form_end(form) }}
+{% endblock main %}
