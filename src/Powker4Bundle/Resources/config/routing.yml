@@ -1,0 +1,28 @@
+powker4_index:
+    path:     /
+    defaults: { _controller: Powker4Bundle:Powker4:index }
+
+powker4_game_start:
+    path:     /game/start
+    defaults: { _controller: Powker4Bundle:Game:start }
+    requirements:
+        id: \d+
+
+powker4_game_view:
+    path:     /game/{id}
+    defaults: { _controller: Powker4Bundle:Game:view }
+    requirements:
+        id: \d+
+
+powker4_game_update:
+    path:     /game/{id}
+    defaults: { _controller: Powker4Bundle:Game:update }
+    requirements:
+        id: \d+
+        method: POST
+
+powker4_game_finish:
+    path:     /game/{id}/finish
+    defaults: { _controller: Powker4Bundle:Game:finish }
+    requirements:
+        id: \d+

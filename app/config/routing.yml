@@ -1,0 +1,7 @@
+powker4:
+    resource: "@Powker4Bundle/Resources/config/routing.yml"
+    prefix:   /
+
+# app:
+#     resource: "@AppBundle/Controller/"
+#     type:     annotation
