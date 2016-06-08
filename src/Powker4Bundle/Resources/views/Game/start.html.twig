@@ -1,12 +1,24 @@
 {% extends 'Powker4Bundle::layout.html.twig' %}
 
 {% block main %}
-{{ form_start(form) }}
 
-{{ form_label(form.x) }}
-{{ form_widget(form.x, {'attr': {'class': 'input', 'value': '7'}}) }}
-{{ form_label(form.y) }}
-{{ form_widget(form.y, {'attr': {'class': 'input', 'value': '6'}}) }}
+{#{ form_start(form) }#}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+<div class="form-group">
+  {{ form_errors(form.x) }}
+  {{ form_label(form.x, 'Colonnes') }}
+  {{ form_widget(form.x, {'attr': {'class': 'form-control', 'value': '7'}}) }}
+</div>
+
+<div class="form-group">
+  {{ form_errors(form.y) }}
+  {{ form_label(form.y, 'Lignes') }}
+  {{ form_widget(form.y, {'attr': {'class': 'form-control', 'value': '6'}}) }}
+</div>
+
+<button type="submit" class="btn btn-primary">Commencer</button>
 
 {{ form_end(form) }}
+
 {% endblock main %}

@@ -1,0 +1,6 @@
+Powker4Bundle\Entity\Grid:
+    properties:
+        x:
+            - NotBlank: {message: Veuillez renseigner les nombre de colonnes}
+        y:
+            - NotBlank: {message: Veuillez renseigner les nombre de lignes}
