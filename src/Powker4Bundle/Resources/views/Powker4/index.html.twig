@@ -1,9 +1,27 @@
 {% extends 'Powker4Bundle::layout.html.twig' %}
 
 {% block main %}
-Avez-vous un porte-monaie ? Très bien, si vous voulez continuer, vous en aurez besoin (beaucoup).
-<a href="{{ path('powker4_game_start') }}"
-   class="btn btn-primary">
-  Démarrer une partie
-</a>
+
+
+<h1>Bienvenue sur Powker 4</h1>
+<h2>Un jeu qui peut vous rapporter beaucoup d'argent !</h2>
+<h3>Règles du jeu</h3>
+<p>Powker4 est un jeu né du mélange d'un Puissance 4 et d'un Poker. Les deux joueurs
+    placent à tour de rôle leurs jetons dans une grille de taille variable. Les jetons
+    sont lachés en haut d'une des colones de la grille, et chutent jusqu'à la
+    position la plus basse ('cause of the gravity bro). Le premier qui parvient à
+    aligner 4 jetons gagne la partie. MAIS ce n'est pas tout, chaque jeton à une valeur en $,
+    le joueur consomme ses $ pour placer des jetons sur la grille, et le vainqueur rafle la
+    totalité des jetons lors de sa victoire. Si vous êtes surs de vous, il est peut-être
+    préférable de ne pas gagner trop rapidement, afin de laisser votre adversaire placer
+    davantage d'argent sur le plateau de jeu, et ainsi rafler une plus grosse mise.
+    Restez prudent cependant car il existe des jetons spéciaux pouvant renverser soudainement
+    le cours de la partie.
+</p>
+<h3>Créer une partie</h3>
+<div class="centered">
+    <a href="{{ path('powker4_game_start') }}" class="btn btn-primary">Démarrer une partie</a>
+</div>
+
+<blockquote>Avez-vous un porte-monnaie ? Très bien, si vous voulez continuer, vous en aurez besoin (beaucoup). <p>Benjamin &laquo;&nbsp;HardGuinsoo&nbsp;&raquo; Grimault</p></blockquote>
 {% endblock main %}

@@ -4,6 +4,7 @@
 }
 body {
     background-color:#000000;
+    color:#FFFFFF;
 }
 #grid {
     margin-bottom:0px;
@@ -59,4 +60,32 @@ body {
     border:2px solid #B23333;
     width:56px;
     height:56px;
+}
+
+h1 {
+    text-align:center;
+}
+h2 {
+    text-align:center;
+    margin:15px auto;
+}
+h3 {
+    text-align:center;
+    margin:15px auto;
+}
+p {
+    max-width:50%;
+    text-align:justify;
+    margin:0px auto;
+}
+blockquote {
+    font-style:italic;
+    text-align:center;
+    margin:25px auto;
+}
+blockquote > p {
+    text-align:right;
+}
+.centered {
+    text-align:center;
 }
