@@ -2,38 +2,53 @@
 
 {% block main %}
 <table id="grid">
-  {% for i in 0..5 %}
-  <tr>
-    {% for i in 0..6 %}
-    <td></td>
+  <thead>
+    {% for key, form in forms %}
+    <th>
+      {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <div class="form-group">
+          {{ form_widget(form.x, {'attr': {'class': 'form-control', 'value': key}}) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Placer</button>
+
+      {{ form_end(form) }}
+    </th>
     {% endfor %}
-  </tr>
-  {% endfor %}
+  </thead>
+  <tbody>
+    {% for i in 0..5 %}
+    <tr>
+      {% for i in 0..6 %}
+      <td></td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
-<!-- <table id="grid">
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><div class="piece_b"><div></div></div></td>
-        <td><div class="piece_a"><div></div></div></td>
-        <td></td>
-        <td><div class="piece_b"><div></div></div></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><div class="piece_b"><div></div></div></td>
-        <td></td>
-        <td><div class="piece_a"><div></div></div></td>
-        <td><div class="piece_a"><div></div></div></td>
-        <td><div class="piece_b"><div></div></div></td>
-        <td><div class="piece_a"><div></div></div></td>
-    </tr>
-</table> -->
-<form id="form">
-    <label>Colonne (de 1 à 7) :<Label>
-    <input type="number" name="column" id="number" min="1" max="7" value="1">
-    <input type="submit" name="submit" id="submit" value="Valider"/>
-</form>
+{#
+<table id="grid">
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="piece_b"><div></div></div></td>
+    <td><div class="piece_a"><div></div></div></td>
+    <td></td>
+    <td><div class="piece_b"><div></div></div></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><div class="piece_b"><div></div></div></td>
+    <td></td>
+    <td><div class="piece_a"><div></div></div></td>
+    <td><div class="piece_a"><div></div></div></td>
+    <td><div class="piece_b"><div></div></div></td>
+    <td><div class="piece_a"><div></div></div></td>
+  </tr>
+</table>
+#}
+
 {% endblock main %}

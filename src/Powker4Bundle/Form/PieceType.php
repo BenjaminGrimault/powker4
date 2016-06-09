@@ -16,7 +16,7 @@ class PieceType extends AbstractType
     {
         $builder
             // ->add('color')
-            ->add('x')
+            ->add('x', 'hidden')
             // ->add('y')
         ;
     }

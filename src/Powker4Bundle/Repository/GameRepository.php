@@ -12,4 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class GameRepository extends EntityRepository
 {
+    public function findUs()
+    {
+        $q = $this->createQueryBuilder('g');
+    }
 }
