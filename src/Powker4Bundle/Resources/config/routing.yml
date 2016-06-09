@@ -15,7 +15,7 @@ powker4_game_view:
         id: \d+
 
 powker4_game_update:
-    path:     /game/{id}
+    path:     /game/{id}/update
     defaults: { _controller: Powker4Bundle:Game:update }
     requirements:
         id: \d+

@@ -9,6 +9,7 @@ use Powker4Bundle\Entity\Grid;
 use Powker4Bundle\Entity\Piece;
 use Powker4Bundle\Form\GridType;
 use Powker4Bundle\Form\PieceType;
+use Powker4Bundle\Api\Game as GameService;
 
 class GameController extends Controller
 {
@@ -71,16 +72,29 @@ class GameController extends Controller
             $forms[] = $form->createView();
         }
 
-        $form->handleRequest($request);
-
         return $this->render('Powker4Bundle:Game:index.html.twig', [
             'game'  => $game,
             'forms' => $forms,
         ]);
     }
 
-    public function updateAction($id)
+    public function updateAction(Request $request, $id)
     {
+        $gameSrv = $this->get('powker4.game');
+
+        $formBuilder = new PieceType();
+        $piece = new Piece();
+
+        $form = $this->createForm($formBuilder, $piece, [
+            'method' => 'POST',
+            'action' => $this->generateUrl('powker4_game_update', [
+                'id' => $id,
+            ]),
+        ]);
+
+        $form->handleRequest($request);
+
+        $gameSrv->insertPiece($piece);
 
         return $this->redirect($this->generateUrl('powker4_game_view', [
             'id' => $id,
