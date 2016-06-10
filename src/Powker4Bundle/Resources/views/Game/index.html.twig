@@ -18,10 +18,14 @@
     {% endfor %}
   </thead>
   <tbody>
-    {% for i in 0..5 %}
+    {% for y in 0..(grid.y -1) %}
     <tr>
-      {% for i in 0..6 %}
-      <td></td>
+      {% for x in 0..(grid.x - 1) %}
+      <td>
+        {% if pieces[x][y] is defined %}
+        <div class="piece_{{ pieces[x][y] }}"><div>
+        {% endif %}
+      </td>
       {% endfor %}
     </tr>
     {% endfor %}

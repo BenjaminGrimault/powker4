@@ -38,7 +38,7 @@ class Grid
     /**
      * @var ArrayCollection|Piece[]
      *
-     * @orm\OneToMany(targetEntity="Piece",mappedBy="product")
+     * @orm\OneToMany(targetEntity="Piece",mappedBy="grid")
      */
      private $pieces;
 
@@ -131,7 +131,7 @@ class Grid
     /**
      * Get pieces
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection|Pieces[]
      */
     public function getPieces()
     {

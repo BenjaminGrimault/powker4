@@ -45,7 +45,7 @@ class Piece
     /**
      * @var Grid
      *
-     * @ORM\ManyToOne(targetEntity="Grid", inversedBy="piece")
+     * @ORM\ManyToOne(targetEntity="Grid", inversedBy="pieces")
      */
     private $grid;
 

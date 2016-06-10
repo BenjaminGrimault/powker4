@@ -4,6 +4,7 @@ namespace Powker4Bundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Powker4Bundle\Entity\Game;
 use Powker4Bundle\Entity\Grid;
 use Powker4Bundle\Entity\Piece;
@@ -33,14 +34,16 @@ class GameController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $game = new Grid();
-
             $em->persist($grid);
+            $em->flush();
 
+            $game = new Game();
+            $game->setGrid($grid);
+            $em->persist($game);
             $em->flush();
 
             return $this->redirect($this->generateUrl('powker4_game_view', [
-                'id'   => $grid->getId(),
+                'id' => $game->getId(),
             ]));
         }
 
@@ -51,18 +54,21 @@ class GameController extends Controller
 
     public function viewAction(Request $request, $id)
     {
+        $gameSrv = $this->get('powker4.game');
+
         $em = $this->getDoctrine()->getManager();
 
         $game = $em->getRepository('Powker4Bundle:Game')
             ->findOneById($id);
 
-        $formBuilder = new PieceType();
-        $piece = new Piece();
+        $grid = $game->getGrid();
+
+        $pieces = $gameSrv->getGameBoard($grid);
 
         $forms = [];
 
-        for ($i = 0; $i < 7; $i++) {
-            $form = $this->createForm($formBuilder, $piece, [
+        for ($i = 0; $i < $grid->getX(); $i++) {
+            $form = $this->createForm(new PieceType(), new Piece(), [
                 'method' => 'POST',
                 'action' => $this->generateUrl('powker4_game_update', [
                     'id' => $id,
@@ -73,15 +79,15 @@ class GameController extends Controller
         }
 
         return $this->render('Powker4Bundle:Game:index.html.twig', [
-            'game'  => $game,
-            'forms' => $forms,
+            'game'   => $game,
+            'grid'   => $grid,
+            'forms'  => $forms,
+            'pieces' => $pieces,
         ]);
     }
 
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $gameSrv = $this->get('powker4.game');
 
         $formBuilder = new PieceType();
@@ -107,5 +113,22 @@ class GameController extends Controller
     {
         $us = $this-getRepository('Powker4Bundle:Game')->findUs();
         return $this->redirect('powker4_index');
+    }
+
+    /**
+     * Unused / Example
+     */
+    public function jsonAction()
+    {
+        $return = json_encode(['coucou']);
+
+        return new Response($return, 200, [
+            'Content-Type' => 'application/json',
+        ]);
+
+        $return = new JsonResponse();
+        $return->headers->set('Content-Type', 'application/json');
+        $return->setData(json_encode(['coucou']));
+        return $return;
     }
 }

@@ -3,7 +3,7 @@
     padding:0px;
 }
 body {
-    background-color:#000000;
+    background-color:#222;
     color:#FFFFFF;
 }
 #grid {
@@ -33,7 +33,7 @@ body {
     width:50px;
     height:25px;
 }
-.piece_a {
+.piece_1 {
     width:60px;
     height:60px;
     border-radius:50%;
@@ -41,13 +41,13 @@ body {
     margin:auto;
     padding:2px;
 }
-.piece_a > div {
+.piece_1 > div {
     border-radius:50%;
     border:2px solid #D1C030;
     width:56px;
     height:56px;
 }
-.piece_b {
+.piece_2 {
     width:60px;
     height:60px;
     border-radius:50%;
@@ -55,7 +55,7 @@ body {
     margin:auto;
     padding:2px;
 }
-.piece_b > div {
+.piece_2 > div {
     border-radius:50%;
     border:2px solid #B23333;
     width:56px;
