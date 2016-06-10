@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class PieceRepository extends EntityRepository
 {
+    public function retrievePiecesByColumn($column)
+    {
+        $pieces = $this->createQueryBuilder('p')
+            ->select('pieces')
+            ->from('piece', 'p')
+            ->where('p.x = :column')
+            ->orderBy('p.y', 'ASC')
+        ;
+
+        return $pieces->getQuery()->getResult();
+    }
 }
