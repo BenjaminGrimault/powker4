@@ -42,6 +42,13 @@ class Game
      */
     private $winner;
 
+    /**
+    * @var Grid
+    *
+    * @ORM\OneToOne(targetEntity="Grid")
+    */
+    private $grid;
+
     public function __construct()
     {
         $this->startTs = time();
@@ -125,5 +132,28 @@ class Game
     public function getWinner()
     {
         return $this->winner;
+    }
+
+    /**
+     * Set grid
+     *
+     * @param \Powker4Bundle\Entity\Grid $grid
+     * @return Game
+     */
+    public function setGrid(\Powker4Bundle\Entity\Grid $grid = null)
+    {
+        $this->grid = $grid;
+
+        return $this;
+    }
+
+    /**
+     * Get grid
+     *
+     * @return \Powker4Bundle\Entity\Grid
+     */
+    public function getGrid()
+    {
+        return $this->grid;
     }
 }

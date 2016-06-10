@@ -35,11 +35,17 @@ class Grid
      */
     private $y;
 
+    /**
+     * @var ArrayCollection|Piece[]
+     *
+     * @orm\OneToMany(targetEntity="Piece",mappedBy="product")
+     */
+     private $pieces;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +68,7 @@ class Grid
     /**
      * Get x
      *
-     * @return integer 
+     * @return integer
      */
     public function getX()
     {
@@ -85,10 +91,50 @@ class Grid
     /**
      * Get y
      *
-     * @return integer 
+     * @return integer
      */
     public function getY()
     {
         return $this->y;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add pieces
+     *
+     * @param \Powker4Bundle\Entity\Piece $pieces
+     * @return Grid
+     */
+    public function addPiece(\Powker4Bundle\Entity\Piece $pieces)
+    {
+        $this->pieces[] = $pieces;
+
+        return $this;
+    }
+
+    /**
+     * Remove pieces
+     *
+     * @param \Powker4Bundle\Entity\Piece $pieces
+     */
+    public function removePiece(\Powker4Bundle\Entity\Piece $pieces)
+    {
+        $this->pieces->removeElement($pieces);
+    }
+
+    /**
+     * Get pieces
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPieces()
+    {
+        return $this->pieces;
     }
 }

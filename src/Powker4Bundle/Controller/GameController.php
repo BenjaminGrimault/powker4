@@ -80,6 +80,8 @@ class GameController extends Controller
 
     public function updateAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $gameSrv = $this->get('powker4.game');
 
         $formBuilder = new PieceType();
@@ -94,7 +96,7 @@ class GameController extends Controller
 
         $form->handleRequest($request);
 
-        $gameSrv->insertPiece($piece);
+        $gameSrv->insertPiece($piece, $id);
 
         return $this->redirect($this->generateUrl('powker4_game_view', [
             'id' => $id,

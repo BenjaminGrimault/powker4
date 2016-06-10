@@ -42,11 +42,17 @@ class Piece
      */
     private $y;
 
+    /**
+     * @var Grid
+     *
+     * @ORM\ManyToOne(targetEntity="Grid", inversedBy="piece")
+     */
+    private $grid;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +75,7 @@ class Piece
     /**
      * Get color
      *
-     * @return integer 
+     * @return integer
      */
     public function getColor()
     {
@@ -92,7 +98,7 @@ class Piece
     /**
      * Get x
      *
-     * @return integer 
+     * @return integer
      */
     public function getX()
     {
@@ -115,10 +121,33 @@ class Piece
     /**
      * Get y
      *
-     * @return integer 
+     * @return integer
      */
     public function getY()
     {
         return $this->y;
+    }
+
+    /**
+     * Set grid
+     *
+     * @param \Powker4Bundle\Entity\Grid $grid
+     * @return Piece
+     */
+    public function setGrid(\Powker4Bundle\Entity\Grid $grid = null)
+    {
+        $this->grid = $grid;
+
+        return $this;
+    }
+
+    /**
+     * Get grid
+     *
+     * @return \Powker4Bundle\Entity\Grid
+     */
+    public function getGrid()
+    {
+        return $this->grid;
     }
 }
