@@ -42,6 +42,12 @@ class Address
      */
     private $city;
 
+    /**
+     * @var ArrayCollection|Contact[]
+     *
+     * @ORM\ManyToMany(targetEntity="Contact", inversedBy="addresses")
+     */
+    private $contacts;
 
     /**
      * Get id
@@ -120,5 +126,68 @@ class Address
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param \Powker4Bundle\Entity\Contact $contact
+     * @return Address
+     */
+    public function setContact(\Powker4Bundle\Entity\Contact $contact = null)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return \Powker4Bundle\Entity\Contact
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->contacts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add contacts
+     *
+     * @param \Powker4Bundle\Entity\Contact $contacts
+     * @return Address
+     */
+    public function addContact(\Powker4Bundle\Entity\Contact $contacts)
+    {
+        $this->contacts[] = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * Remove contacts
+     *
+     * @param \Powker4Bundle\Entity\Contact $contacts
+     */
+    public function removeContact(\Powker4Bundle\Entity\Contact $contacts)
+    {
+        $this->contacts->removeElement($contacts);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
     }
 }
