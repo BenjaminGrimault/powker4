@@ -26,3 +26,9 @@ powker4_game_finish:
     defaults: { _controller: Powker4Bundle:Game:finish }
     requirements:
         id: \d+
+
+powker4_contact:
+    path:     /contact
+    defaults: { _controller: Powker4Bundle:Powker4:contact }
+    requirements:
+        id: \d+
