@@ -53,6 +53,7 @@ class Powker4Controller extends Controller
                         ),
                         'text/html'
                     );
+                $this->get('mailer')->send($mail);
 
                 return $this->redirect($this->generateUrl('powker4_index'));
             }
