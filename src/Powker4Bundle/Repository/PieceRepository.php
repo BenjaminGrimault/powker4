@@ -12,15 +12,33 @@ use Doctrine\ORM\EntityRepository;
  */
 class PieceRepository extends EntityRepository
 {
-    public function retrievePiecesByColumn($column)
+
+    public function retrievePiecesByColumn($column, $grid)
     {
         $pieces = $this->createQueryBuilder('p')
-            ->select('pieces')
-            ->from('piece', 'p')
+            ->select('p')
             ->where('p.x = :column')
+            ->andWhere('p.grid = :grid')
             ->orderBy('p.y', 'ASC')
+            ->setParameter('column', $column)
+            ->setParameter('grid', $grid)
         ;
 
         return $pieces->getQuery()->getResult();
+    }
+
+    public function findPiecesNumberByColor($gridId, $color)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+                SELECT count(p.id) FROM Powker4Bundle:Piece p
+                WHERE p.grid = :gridId
+                AND p.color = :color
+            ')
+            ->setParameter('gridId', $gridId)
+            ->setParameter('color', $color)
+        ;
+
+        return $query->getResult();
     }
 }

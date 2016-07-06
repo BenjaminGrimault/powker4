@@ -18,37 +18,70 @@ class Game
      * @var Piece $piece
      * @var int $gameId
      * @var EntityManager $em
-     * @throws Exception
      */
-    public function insertPiece($piece, $gameId, $em)
+    public function insertPiece($piece, $gameId)
     {
-        // récupérer la game par son id via doctrine
-        $game = $em
+        $return = true;
+
+        // Find related game
+        $game = $this->em
             ->getRepository('Powker4Bundle:Game')
             ->findOneById($gameId)
         ;
-        // récupérer la grid par son id de game
+        // Get related grid
         $grid = $game->getGrid();
 
-        // vérifier que le x de la piece est correct (entre 0 et n)
+        // Check bounds
         if ($piece->getX() < 0 || $piece->getX() >= $grid->getX()) {
-            // Le jeton est en dehors de la grille ou null
-            throw new Exception("Out of bounds", 1);
+            $return = false;
         }
 
-        // Tous les jetons associés à la grid de la game en colonne x si la colonne n'est pas pleine
+        // Find pieces are in same column than pieces
+        $pieces = $this->em->getRepository('Powker4Bundle:Piece')
+            ->retrievePiecesByColumn($piece->getX(), $grid);
 
-        $pieces = $em->getRepository('PieceRepository')
-            ->retrievePiecesByColumn($piece->getX());
+        $newY = count($pieces);
 
-        // COmpter les jetons
-        $number = count($piece);
-        if ($number >= $grid->getY()) {
-            throw new Exception("Out of bounds", 1);
+        if ($return) {
+            if ($newY >= $grid->getY()) {
+                $return = false;
+            }
         }
-        $piece->setY($number++);
 
+        if ($return) {
+            $piece->setY($newY);
+            $piece->setColor($this->getCurrentColor($grid->getId()));
+            $piece->setGrid($grid);
+            // \Doctrine\Common\Util\Debug::dump($piece);
+            // die();
+            $this->em->persist($piece);
+            $this->em->flush();
+        }
 
+        return $return;
+    }
+
+    public function getCurrentColor($gridId)
+    {
+        $return = 0;
+
+        $pieceRepo = $this->em->getRepository('Powker4Bundle:Piece');
+
+        $colorsNumber = [];
+
+        for ($i = 0; $i < $this->getPlayersNumber() ; $i++) {
+            $colorsNumber[$i] = $pieceRepo
+                ->findPiecesNumberByColor($gridId, $i);
+        }
+
+        $return = array_keys($colorsNumber, min($colorsNumber))[0];
+
+        return $return;
+    }
+
+    public function getPlayersNumber()
+    {
+        return 2;
     }
 
     /**
@@ -60,7 +93,7 @@ class Game
         $return = [];
 
         foreach ($grid->getPieces() as $piece) {
-            $return[$piece->getX()][$grid->getY() - $piece->getY()] =
+            $return[$piece->getX()][$grid->getY() - $piece->getY() - 1] =
                 $piece->getColor();
         }
 
