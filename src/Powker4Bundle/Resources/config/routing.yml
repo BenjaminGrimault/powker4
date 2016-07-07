@@ -9,13 +9,13 @@ powker4_game_start:
         id: \d+
 
 powker4_game_view:
-    path:     /game/{id}
+    path:     /game/{id}/{player}
     defaults: { _controller: Powker4Bundle:Game:view }
     requirements:
         id: \d+
 
 powker4_game_update:
-    path:     /game/{id}/update
+    path:     /game/{id}/update/{player}
     defaults: { _controller: Powker4Bundle:Game:update }
     requirements:
         id: \d+

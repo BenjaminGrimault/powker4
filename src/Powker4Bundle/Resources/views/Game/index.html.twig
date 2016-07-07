@@ -1,7 +1,14 @@
 {% extends 'Powker4Bundle::layout.html.twig' %}
 
 {% block main %}
+{% if player == 0 %}
+<div class="play-with-friend">
+  Donnez cette URL à votre ami pour qu'il puisse jouer avec vous : {{ friendUrl }}
+</div>
+{% endif %}
+
 <table id="grid">
+  {% if toPlay %}
   <thead>
     {% for key, form in forms %}
     <th>
@@ -17,6 +24,8 @@
     </th>
     {% endfor %}
   </thead>
+  {% endif %}
+
   <tbody>
     {% for y in 0..(grid.y - 1) %}
     <tr>
@@ -31,28 +40,5 @@
     {% endfor %}
   </tbody>
 </table>
-
-{#
-<table id="grid">
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><div class="piece_b"><div></div></div></td>
-    <td><div class="piece_a"><div></div></div></td>
-    <td></td>
-    <td><div class="piece_b"><div></div></div></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><div class="piece_b"><div></div></div></td>
-    <td></td>
-    <td><div class="piece_a"><div></div></div></td>
-    <td><div class="piece_a"><div></div></div></td>
-    <td><div class="piece_b"><div></div></div></td>
-    <td><div class="piece_a"><div></div></div></td>
-  </tr>
-</table>
-#}
 
 {% endblock main %}

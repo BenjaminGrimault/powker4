@@ -43,7 +43,8 @@ class GameController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('powker4_game_view', [
-                'id' => $game->getId(),
+                'id'     => $game->getId(),
+                'player' => 0,
             ]));
         }
 
@@ -52,7 +53,7 @@ class GameController extends Controller
         ]);
     }
 
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, $id, $player)
     {
         $gameSrv = $this->get('powker4.game');
 
@@ -71,7 +72,8 @@ class GameController extends Controller
             $form = $this->createForm(new PieceType(), new Piece(), [
                 'method' => 'POST',
                 'action' => $this->generateUrl('powker4_game_update', [
-                    'id' => $id,
+                    'id'     => $id,
+                    'player' => $player,
                 ]),
             ]);
 
@@ -79,14 +81,20 @@ class GameController extends Controller
         }
 
         return $this->render('Powker4Bundle:Game:index.html.twig', [
-            'game'   => $game,
-            'grid'   => $grid,
-            'forms'  => $forms,
-            'pieces' => $pieces,
+            'game'      => $game,
+            'grid'      => $grid,
+            'forms'     => $forms,
+            'pieces'    => $pieces,
+            'player'    => $player,
+            'toPlay'    => $gameSrv->getCurrentColor($grid->getId()) == $player,
+            'friendUrl' => $this->generateUrl('powker4_game_view', [
+                'id'     => $id,
+                'player' => 1,
+            ]),
         ]);
     }
 
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $player)
     {
         $gameSrv = $this->get('powker4.game');
 
@@ -97,6 +105,7 @@ class GameController extends Controller
             'method' => 'POST',
             'action' => $this->generateUrl('powker4_game_update', [
                 'id' => $id,
+                'player' => $player,
             ]),
         ]);
 
@@ -105,7 +114,8 @@ class GameController extends Controller
         $gameSrv->insertPiece($piece, $id);
 
         return $this->redirect($this->generateUrl('powker4_game_view', [
-            'id' => $id,
+            'id'     => $id,
+            'player' => $player,
         ]));
     }
 
