@@ -1,0 +1,26 @@
+{% block title %}
+<h1>titre</h1>
+{% endblock title %}
+
+{% block main %}
+<h2>Liste de contact</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Checked ?</th>
+    </tr>
+{% for i in 0..contacts|length-1 %}
+<tr>
+    <td>{{ contacts[i].firstname }} {{ contacts[i].lastname }}</td>
+    <td>{{ contacts[i].email }}</td>
+    <td>
+        {{ form_start(contactForms[i]) }}
+            {{ form_widget(contactForms[i].checked, {'attr': {'class': 'form-control'}}) }}
+        {{ form_end(contactForms[i]) }}
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+{% endblock main %}

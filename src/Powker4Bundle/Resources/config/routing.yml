@@ -32,3 +32,9 @@ powker4_contact:
     defaults: { _controller: Powker4Bundle:Powker4:contact }
     requirements:
         id: \d+
+
+powker4_admin_contact:
+    path:     /admin/contact
+    defaults: { _controller: Powker4Bundle:Admin:contact }
+    requirements:
+        id: \d+

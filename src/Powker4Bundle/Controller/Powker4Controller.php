@@ -41,7 +41,7 @@ class Powker4Controller extends Controller
             }
             if($transactionStatus){
                 $em->flush();
-                $this->addFlash('notice', 'Merci pour votre retour, votre message sera traité dans les plus brefs délais :)');
+                $this->addFlash('notice', 'Merci pour votre opinion passionante, votre message ne sera pas traité dans les plus brefs délais :)');
                 $mail = \Swift_Message::newInstance()
                     ->setSubject('Une demande de contact à été passée')
                     ->setFrom($contact->getEmail())
@@ -61,6 +61,27 @@ class Powker4Controller extends Controller
 
         return $this->render('Powker4Bundle:Powker4:contact.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    public function adminContactAction(Request $request)
+    {
+        $em = $this->getdoctrine()->getManager();
+        $contacts = $em->getRepository('Powker4Bundle:Contact')->findAll();
+        $contactform = [];
+
+        forEach($contacts as $contact){
+            $formContact = $this->createform(new ContactType(), $contact, [
+                'methode'=> 'post',
+                'action'=>$this->generateUrl('powker4_admin_contact', [
+                    'id' => $contact->getId()
+                ]),
+            ]);
+            $contactForm[] = $formContact->createView();
+        }
+        return $this->render('Powker4Bundle:Powker4:adminContact.html.twig', [
+            'contact' => $contacts,
+            'contactForm' => $contactForm,
         ]);
     }
 }

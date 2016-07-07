@@ -1,7 +1,11 @@
 {% extends 'Powker4Bundle::layout.html.twig' %}
-
 {% block main %}
 
+{% for flash_message in app.session.flashBag.get('notice') %}
+    <div class="alert alert-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
 
 <h1>Bienvenue sur Powker 4</h1>
 <h2>Un jeu qui peut vous rapporter beaucoup d'argent !</h2>

@@ -64,6 +64,13 @@ class Contact
     private $addresses;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="checked", type="boolean")
+     */
+    private $checked;
+
+    /**
      * Get id
      *
      * @return integer
@@ -227,5 +234,29 @@ class Contact
     public function getAge()
     {
         return $this->age;
+    }
+
+    /**
+     * Set checked
+     *
+     * @param boolean $checked
+     *
+     * @return Contact
+     */
+    public function setChecked($checked)
+    {
+        $this->checked = $checked;
+
+        return $this;
+    }
+
+    /**
+     * Get checked
+     *
+     * @return boolean
+     */
+    public function getChecked()
+    {
+        return $this->checked;
     }
 }
